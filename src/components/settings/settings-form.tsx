@@ -67,7 +67,7 @@ export const SettingsForm = () => {
     console.log(values);
   };
   return (
-    <Card className="w-full shadow-md">
+    <Card className="w-full h-screen flex flex-col items-center justify-center shadow-md">
       <CardHeader>
         <Header label={"Update your information"} />
       </CardHeader>
