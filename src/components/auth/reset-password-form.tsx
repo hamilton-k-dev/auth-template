@@ -2,7 +2,7 @@
 
 import React, { useState, useTransition } from "react";
 import * as z from "zod";
-import { RegisterSchema } from "@/schemas";
+import { ResetPasswordSchema } from "@/schemas";
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,62 +16,71 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSeparator,
-  InputOTPSlot,
-} from "@/components/ui/input-otp";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FormError } from "../form-error";
 import { FormSuccess } from "../form-success";
 import { register } from "@/actions/register";
 import { Loader } from "lucide-react";
+import { resetPassword } from "@/actions/reset-password";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSeparator,
+  InputOTPSlot,
+} from "@/components/ui/input-otp";
 import Link from "next/link";
 
-export const RegisterForm = () => {
+export const ResetPasswordForm = () => {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>();
   const [success, setSuccess] = useState<string | undefined>();
-  const [mailSend, setMailSend] = useState<boolean | undefined>(false);
-  const [validToken, setValidToken] = useState<boolean | undefined>(false);
-  const [registrationCompleted, setRegistrationCompleted] = useState<
-    boolean | undefined
-  >(false);
-  const form = useForm<z.infer<typeof RegisterSchema>>({
-    resolver: zodResolver(RegisterSchema),
+  const [mailSend, setMailSend] = useState<boolean>(false);
+  const [validToken, setValidToken] = useState<boolean>(false);
+  const [passwordReset, setPasswordReset] = useState<boolean>(false);
+  const headerLabel = passwordReset
+    ? "Your password has been reset"
+    : "Reset your password";
+  const backButtonLabel = validToken ? "" : "Remember your password ?";
+  const backButtonHref = validToken ? "" : "/auth/login";
+  const form = useForm<z.infer<typeof ResetPasswordSchema>>({
+    resolver: zodResolver(ResetPasswordSchema),
     defaultValues: {
       email: "",
+      password: "",
+      token: "",
     },
   });
-  const headerLabel = registrationCompleted
-    ? "Account created"
-    : "Create an account";
-  const backButtonLabel = validToken ? "" : "Already have an account ?";
-  const backButtonHref = validToken ? "" : "/auth/login";
-  const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
+
+  const onSubmit = (values: z.infer<typeof ResetPasswordSchema>) => {
     setError("");
     setSuccess("");
     startTransition(() => {
-      register(values).then((data) => {
+      resetPassword(values).then((data) => {
         setError(data.error);
         setSuccess(data.success);
-        if (data.success) {
-          setMailSend(data.emailSend);
-          setValidToken(data.validToken);
-          setRegistrationCompleted(data.registrationCompleted);
+        if (data.success && data.validEmail) {
+          setMailSend(true);
+        }
+        if (data.success && data.validEmail && data.validToken) {
+          setValidToken(true);
+        }
+        if (
+          data.success &&
+          data.validEmail &&
+          data.validToken &&
+          data.passwordReset
+        ) {
+          setPasswordReset(true);
         }
       });
     });
-    console.log(values);
   };
   return (
     <CardWrapper
       headerLabel={headerLabel}
       backButtonLabel={backButtonLabel}
       backButtonHref={backButtonHref}
-      showSocial={!mailSend}
     >
       <Form {...form}>
         <form
@@ -135,82 +144,36 @@ export const RegisterForm = () => {
                 )}
               />
             )}
-            {mailSend && validToken && !registrationCompleted && (
-              <>
-                <FormField
-                  control={form.control}
-                  name="firstName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>First name</FormLabel>
-                      <FormControl>
-                        <Input
-                          {...field}
-                          disabled={isPending}
-                          placeholder="The"
-                          type="text"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="lastName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>
-                        Last name{" "}
-                        <span className="text-xs text-primary">(optional)</span>
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          {...field}
-                          disabled={isPending}
-                          placeholder="codingH"
-                          type="text"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="password"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Password</FormLabel>
-                      <FormControl>
-                        <Input
-                          {...field}
-                          disabled={isPending}
-                          placeholder="Your very secured password "
-                          type="password"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </>
+            {mailSend && validToken && !passwordReset && (
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="">Your new password</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                        placeholder="enter your new password"
+                        type="password"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             )}
           </div>
           <FormError message={error} />
           <FormSuccess message={success} />
-          {registrationCompleted ? (
-            <div className="w-full">
-              <Button type="button" className="w-full" asChild>
-                <Link href={"/auth/login"} className="">
-                  Login
-                </Link>
-              </Button>
-            </div>
+          {mailSend && validToken && passwordReset ? (
+            <Button type="submit" className="w-full" loading={isPending}>
+              <Link href={"/auth/login"}>Login</Link>
+            </Button>
           ) : (
             <Button type="submit" className="w-full" loading={isPending}>
-              {validToken ? <>Create an acoount</> : <>Continue</>}
+              {!validToken ? <>Continue</> : <>Reset password</>}
             </Button>
           )}
         </form>

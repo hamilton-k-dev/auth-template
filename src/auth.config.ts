@@ -12,10 +12,28 @@ export default {
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      allowDangerousEmailAccountLinking: true,
+      async profile(profile) {
+        return {
+          email: profile.email,
+          firstName:profile.given_name,
+          lastName:profile.family_name,
+          image: profile.picture
+        }
+      }
     }),
     Github({
       clientId: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      allowDangerousEmailAccountLinking: true,
+      async profile(profile) {
+        return {
+          email: profile.email,
+          firstName:profile.name?.split(" ")[0],
+          lastName:profile.name?.split(" ")[1],
+          image: profile.avatar_url
+        }
+      }
     }),
     Credentials({
       async authorize(credentials) {
@@ -29,9 +47,7 @@ export default {
             user.password
             );
             if (passwordsMatch) return user;
-        }
-        
-        
+        } 
         return null;
       },
     }),

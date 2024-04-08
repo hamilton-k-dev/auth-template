@@ -24,11 +24,15 @@ export const getUserById = async (id:string|undefined) => {
     return null;
   }
 };
-// export const getAccountByUserId = async (id:string) => {
-//   try {
-//     const account = await db.account.findUnique({ where: { userId: id } });
-//     return account;
-//   } catch (error) {
-//     return null;
-//   }
-// };
+export const getAccountByUserId = async (id:string) => {
+  try {
+    const account = await db.account.findFirst({ 
+        where: { 
+            userId: id
+        }
+     });
+    return account;
+  } catch (error) {
+    return null;
+  }
+};

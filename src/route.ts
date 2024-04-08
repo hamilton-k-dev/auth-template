@@ -10,8 +10,9 @@ export const PublicRoutes = ["/", "/courses", "/auth/new-verification"];
 export const authRoutes = [
   "/auth/login",
   "/auth/register",
+  "/auth/join",
   "/auth/error",
-  "/auth/reset_password",
+  "/auth/reset-password",
   "/auth/new-password",
 ];
 export const adminRoutes = "/admin";

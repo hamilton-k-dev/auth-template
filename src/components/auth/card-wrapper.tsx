@@ -13,8 +13,8 @@ import { BackButton } from "@/components/auth/back-button";
 interface CardWrapperProps {
   children: React.ReactNode;
   headerLabel: string;
-  backButtonLabel: string;
-  backButtonHref: string;
+  backButtonLabel?: string;
+  backButtonHref?: string;
   showSocial?: boolean;
 }
 export const CardWrapper = ({
@@ -29,12 +29,13 @@ export const CardWrapper = ({
       <CardHeader>
         <Header label={headerLabel} />
       </CardHeader>
-      <CardContent>{children}</CardContent>
-      {showSocial && (
-        <CardFooter>
-          <Social />
-        </CardFooter>
-      )}
+
+      <CardContent>
+        <div className="flex flex-col gap-4">
+          {showSocial && <Social />}
+          {children}
+        </div>
+      </CardContent>
       <CardFooter>
         <BackButton href={backButtonHref} label={backButtonLabel} />
       </CardFooter>
