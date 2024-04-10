@@ -84,5 +84,15 @@
     },
     "settings":{
       "logout":"Logout"
+    },
+    "email":{
+      "emailS":"email sent",
+      "sendingME":"error trying to send an email",
+      "resetP":"Reset your password",
+      "resetT":"your email reset token is",
+      "confirmE":"Confirm your email address",
+      "emailVT":"your email verification token is",
+      "2fa":"2FA code",
+      "2faCode":"your two factor autentication code is"
     }
   }

@@ -84,5 +84,15 @@
     },
     "settings":{
       "logout":"Se deconnerter"
-    }
+    },"email": {
+      "emailS": "Email envoyé",
+      "sendingME": "Erreur lors de l'envoi de l'email",
+      "resetP": "Réinitialiser votre mot de passe",
+      "resetT": "Votre jeton de réinitialisation d'email est",
+      "confirmE": "Confirmez votre adresse email",
+      "emailVT": "Votre jeton de vérification d'email est",
+      "2fa": "Code 2FA",
+      "2faCode": "Votre code d'authentification à deux facteurs est"
+  }
+  
   }
