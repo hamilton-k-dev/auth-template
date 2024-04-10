@@ -8,7 +8,7 @@
 
 # testing
 /coverage
-/middleware
+/src/middleware
 
 # next.js
 /.next/
