@@ -21,17 +21,17 @@ const intlMiddleware = createMiddleware({
   defaultLocale: 'en'
 
 })
-const validateUrl = (req: any) => {
-  const { nextUrl } = req;
-  const { cookies } = req;
-  console.log(cookies);
-  const locale = cookies.get("NEXT_LOCALE")?.value || "en"
-  const isUrlWithLocalPath = nextUrl.pathname.startsWith(`/${locale}`)
-  if (!isUrlWithLocalPath) {
-    return Response.redirect(new URL(`/${locale}/${nextUrl.pathname}`, nextUrl));
-  }
-  return
-}
+// const validateUrl = (req: any) => {
+//   const { nextUrl } = req;
+//   const { cookies } = req;
+//   console.log(cookies);
+//   const locale = cookies.get("NEXT_LOCALE")?.value || "en"
+//   const isUrlWithLocalPath = nextUrl.pathname.startsWith(`/${locale}`)
+//   if (!isUrlWithLocalPath) {
+//     return Response.redirect(new URL(`/${locale}/${nextUrl.pathname}`, nextUrl));
+//   }
+//   return
+// }
 const authMiddleware = auth((req) => {
   const { nextUrl } = req;
   const { cookies } = req;
@@ -39,7 +39,7 @@ const authMiddleware = auth((req) => {
   const isLogging = !!req.auth;
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
   const isPublicRoute = nextUrl.pathname == "/" || publicRoutesLocale.includes(nextUrl.pathname);
-  const isAuthRoutes = authRoutesLocale.includes(nextUrl.pathname) || authRoutesLocale.includes(nextUrl.pathname);
+  const isAuthRoutes = authRoutes.includes(nextUrl.pathname) || authRoutesLocale.includes(nextUrl.pathname);
   if (isApiAuthRoute) {
     return
   }
