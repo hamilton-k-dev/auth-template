@@ -39,7 +39,7 @@ const authMiddleware = auth((req) => {
   const isLogging = !!req.auth;
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
   const isPublicRoute = nextUrl.pathname == "/" || publicRoutesLocale.includes(nextUrl.pathname);
-  const isAuthRoutes = authRoutesLocale.includes(nextUrl.pathname);
+  const isAuthRoutes = nextUrl.pathname == "/auth/register" || authRoutesLocale.includes(nextUrl.pathname);
   if (isApiAuthRoute) {
     return
   }
