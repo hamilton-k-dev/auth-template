@@ -38,7 +38,7 @@ const authMiddleware = auth((req) => {
   const locale = cookies.get("NEXT_LOCALE")?.value || "en"
   const isLogging = !!req.auth;
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
-  const isPublicRoute = nextUrl.pathname == "" || publicRoutesLocale.includes(nextUrl.pathname);
+  const isPublicRoute = nextUrl.pathname == "/" || publicRoutesLocale.includes(nextUrl.pathname);
   const isAuthRoutes = authRoutesLocale.includes(nextUrl.pathname);
   if (isApiAuthRoute) {
     return
