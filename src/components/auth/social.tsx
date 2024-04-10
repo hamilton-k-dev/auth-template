@@ -6,8 +6,10 @@ import { signIn } from "next-auth/react";
 import Cookies from "js-cookie";
 import { DEFAULT_LOGIN_REDIRECT } from "@/route";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 export const Social = () => {
+  const t = useTranslations("LoginPage");
   const [state, setState] = useState<{
     loading: boolean;
     name: "google" | "github";
@@ -48,7 +50,7 @@ export const Social = () => {
       <div className="flex items-center">
         <div className="flex-1 border-t"></div>
         <span className="px-3 text-muted-foreground text-xs">
-          OR CONTINUE WITH
+          {t("social")}
         </span>
         <div className="flex-1 border-t "></div>
       </div>

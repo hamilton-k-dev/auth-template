@@ -32,10 +32,13 @@ import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
 import Header from "../auth/header";
 import useCurrentUser from "@/hooks/use-current-user";
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 
 export const SettingsForm = () => {
+  const t = useTranslations("SettingsPage");
   const { data: session, status, update } = useSession();
   const user = useCurrentUser();
+  console.log(user);
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>();
   const [success, setSuccess] = useState<string | undefined>();
@@ -69,7 +72,7 @@ export const SettingsForm = () => {
   return (
     <Card className="w-full h-screen flex flex-col items-center justify-center shadow-md">
       <CardHeader>
-        <Header label={"Update your information"} />
+        <Header label={t("hearder")} />
       </CardHeader>
       <CardContent>
         <div className="flex flex-col gap-4">
@@ -85,7 +88,9 @@ export const SettingsForm = () => {
                   name="token"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="">Verification token</FormLabel>
+                      <FormLabel className="">
+                        {t("verificationToken")}
+                      </FormLabel>
                       <FormControl>
                         <InputOTP
                           {...field}
@@ -103,7 +108,7 @@ export const SettingsForm = () => {
                                       <InputOTPSeparator />
                                     )}
                                   </React.Fragment>
-                                ))}{" "}
+                                ))}
                               </InputOTPGroup>
                             </>
                           )}
@@ -120,12 +125,12 @@ export const SettingsForm = () => {
                     name="firstName"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>First Name</FormLabel>
+                        <FormLabel>{t("firstName")}</FormLabel>
                         <FormControl>
                           <Input
                             {...field}
                             disabled={isPending}
-                            placeholder="thecodingh@example.com"
+                            placeholder="hamilton_k@example.com"
                             type="text"
                           />
                         </FormControl>
@@ -138,12 +143,12 @@ export const SettingsForm = () => {
                     name="lastName"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Last Name</FormLabel>
+                        <FormLabel>{t("lastName")}</FormLabel>
                         <FormControl>
                           <Input
                             {...field}
                             disabled={isPending}
-                            placeholder="thecodingh@example.com"
+                            placeholder="hamilton_k@example.com"
                             type="text"
                           />
                         </FormControl>
@@ -158,12 +163,12 @@ export const SettingsForm = () => {
                         name="email"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Email</FormLabel>
+                            <FormLabel>{t("email")}</FormLabel>
                             <FormControl>
                               <Input
                                 {...field}
                                 disabled={isPending}
-                                placeholder="thecodingh@example.com"
+                                placeholder="hamilton_k@example.com"
                                 type="email"
                               />
                             </FormControl>
@@ -176,12 +181,12 @@ export const SettingsForm = () => {
                         name="password"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Old Password</FormLabel>
+                            <FormLabel>{t("oldPassword")}</FormLabel>
                             <FormControl>
                               <Input
                                 {...field}
                                 disabled={isPending}
-                                placeholder="Your very secured password "
+                                placeholder={t("passwordLabel")}
                                 type="password"
                               />
                             </FormControl>
@@ -194,12 +199,12 @@ export const SettingsForm = () => {
                         name="newPassword"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>New Password</FormLabel>
+                            <FormLabel>{t("newPasswordLabel")}</FormLabel>
                             <FormControl>
                               <Input
                                 {...field}
                                 disabled={isPending}
-                                placeholder="Your very secured password "
+                                placeholder={t("passwordLabel")}
                                 type="password"
                               />
                             </FormControl>
@@ -214,10 +219,9 @@ export const SettingsForm = () => {
                         render={({ field }) => (
                           <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
                             <div className="space-y-0.5">
-                              <FormLabel>Two factor authentication</FormLabel>
+                              <FormLabel>{t("tFAuthentication")}</FormLabel>
                               <FormDescription>
-                                Enabled two factor authentication for your
-                                account
+                                {t("enabledTFA")}
                               </FormDescription>
                             </div>
 
@@ -240,7 +244,7 @@ export const SettingsForm = () => {
               <FormError message={error} />
               <FormSuccess message={success} />
               <Button type="submit" className="w-full" loading={isPending}>
-                Save
+                {t("save")}
               </Button>
             </form>
           </Form>

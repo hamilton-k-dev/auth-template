@@ -100,7 +100,7 @@ export const ResetPasswordForm = () => {
                       <Input
                         {...field}
                         disabled={isPending}
-                        placeholder="thecodingh@example.com"
+                        placeholder="hamilton_k@example.com"
                         type="email"
                       />
                     </FormControl>

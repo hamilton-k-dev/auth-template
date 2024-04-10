@@ -29,6 +29,7 @@ import { FormSuccess } from "../form-success";
 import { login } from "@/actions/login";
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export const LoginForm = () => {
   const [isPending, startTransition] = useTransition();
@@ -46,10 +47,9 @@ export const LoginForm = () => {
       token: "",
     },
   });
-  const headerLabel = twoFactor
-    ? "An email has been send tou you with a verification token"
-    : "Login in your account";
-  const buttonLabel = twoFactor ? "Continue" : "Login";
+  const t = useTranslations("LoginPage");
+  const headerLabel = twoFactor ? t("hearderLabelEmailSend") : t("description");
+  const buttonLabel = twoFactor ? t("continue") : t("login");
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
     setError("");
     setSuccess("");
@@ -65,7 +65,7 @@ export const LoginForm = () => {
   return (
     <CardWrapper
       headerLabel={headerLabel}
-      backButtonLabel="Don't have an account ?"
+      backButtonLabel={t("actionText")}
       backButtonHref="/auth/register"
       showSocial={!twoFactor}
     >
@@ -88,7 +88,7 @@ export const LoginForm = () => {
                         <Input
                           {...field}
                           disabled={isPending}
-                          placeholder="thecodingh@example.com"
+                          placeholder="hamilton_k@example.com"
                           type="email"
                         />
                       </FormControl>
@@ -103,12 +103,12 @@ export const LoginForm = () => {
                     <FormItem className="relative">
                       <FormLabel>
                         <div className="flex justify-between items-center">
-                          <div>Password</div>
+                          <div>{t("password")}</div>
                           <Link
                             href={"/auth/reset-password"}
                             className=" text-primary text-sm"
                           >
-                            forgot password ?
+                            {t("forgotPassword")}
                           </Link>
                         </div>
                       </FormLabel>
@@ -117,7 +117,7 @@ export const LoginForm = () => {
                           <Input
                             {...field}
                             disabled={isPending}
-                            placeholder="Your very secured password "
+                            placeholder={t("passwordLabel")}
                             type={passwordInputType}
                           />
 
@@ -148,7 +148,7 @@ export const LoginForm = () => {
                 name="token"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="">Verification token</FormLabel>
+                    <FormLabel className="">{"verificationToken"}</FormLabel>
                     <FormControl>
                       <InputOTP
                         {...field}

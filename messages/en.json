@@ -1,0 +1,88 @@
+{
+    "Index": {
+      "title": "Next.js auth template",
+      "description":"This is a Next.js template with a comprehensive authentication features, including social login, two-factor authentication, and password reset functionalities. Additionally, it provides support for both light and dark modes, as well as multi-language capabilities.",
+      "footer":"footer",
+      "login":"Login",
+      "logout":"Logout",
+      "settings":"Settings",
+      "back":"Back"
+    },
+    "LoginPage":{
+      "login":"Login",
+      "register":"Register",
+      "description":"Login in your account",
+      "social":"OR CONTINUE WITH",
+      "email":"Email",
+      "password":"Password",
+      "passwordLabel":"Your strong password",
+      "actionText":"Don't have an account ?",
+      "hearderLabel":"An email has been send tou you with a verification token",
+      "continue":"continue",
+      "forgotPassword":"forgot password ?",
+      "verificationToken":"Verification token"
+    },
+    "RegistrationPage":{
+      "login":"Login",
+      "register":"Register",
+      "description":"Create an account",
+      "social":"OR CONTINUE WITH",
+      "email":"Email",
+      "password":"Password",
+      "passwordLabel":"Your strong password",
+      "actionText":"Already have an account ?",
+      "verificationToken":"Verification token",
+      "firstName":"First name",
+      "lastName":"Last name",
+      "optional":"optional",
+      "continue":"Continue",
+      "finished":"Account created"
+    },
+    "ResetPasswordPage":{
+      "title":"Reset your password",
+      "success":"Your password has been reset",
+      "action":"Remember your password ?",
+      "verificationToken":"Verification token",
+      "newPassword":"Your new password",
+      "newPasswordLabel":"enter your new password"
+    },
+    "SettingsPage":{
+      "hearder":"Update your information",
+      "verificationToken":"Verification token",
+      "firstName":"First Name",
+      "lastName":"Last Name",
+      "oldPassword":"Old Password",
+      "passwordLabel":"Your strong password",
+      "newPasswordLabel":"New Password",
+      "tFAuthentication":"Two factor authentication",
+      "enabledTFA":"Enabled two factor authentication for your account",
+      "save":"Save",
+      "email":"Email"
+    },
+    "action":{
+      "invalidCode":"invalid code !",
+      "codeExpired":"code has expired !",
+      "invalidC":"invalid credentials !",
+      "sWrong":"something went wrong !",
+      "emailAU":"email already used !",
+      "tokenSend":"token sent, check your email address !",
+      "validT":"valid token !",
+      "invalidT":"invalid token !",
+      "accountC":"account created !",
+      "invalidF":"invalid fields !",
+      "emailNotexist":"this email does'nt exist  !",
+      "noUser":"there is no user with this e-mail address !",
+      "passwordRTS":"password reset token sent ! check your email",
+      "passwordReset":"password reset succesfully !",
+      "emailSent":"verification e-mail sent !",
+      "incorectP":"Incorrect password !",
+      "userIU":"user information updated !",
+      "unAuthorized":"Not authorized !"
+    },
+    "Global":{
+      "language":"Language"
+    },
+    "settings":{
+      "logout":"Logout"
+    }
+  }

@@ -29,8 +29,10 @@ import { FormSuccess } from "../form-success";
 import { register } from "@/actions/register";
 import { Loader } from "lucide-react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export const RegisterForm = () => {
+  const t = useTranslations("RegistrationPage");
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>();
   const [success, setSuccess] = useState<string | undefined>();
@@ -45,10 +47,8 @@ export const RegisterForm = () => {
       email: "",
     },
   });
-  const headerLabel = registrationCompleted
-    ? "Account created"
-    : "Create an account";
-  const backButtonLabel = validToken ? "" : "Already have an account ?";
+  const headerLabel = registrationCompleted ? t("finished") : t("description");
+  const backButtonLabel = validToken ? "" : t("actionText");
   const backButtonHref = validToken ? "" : "/auth/login";
   const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
     setError("");
@@ -91,7 +91,7 @@ export const RegisterForm = () => {
                       <Input
                         {...field}
                         disabled={isPending}
-                        placeholder="thecodingh@example.com"
+                        placeholder="hamilton_k@example.com"
                         type="email"
                       />
                     </FormControl>
@@ -106,7 +106,7 @@ export const RegisterForm = () => {
                 name="token"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="">Verification token</FormLabel>
+                    <FormLabel className="">{t("verificationToken")}</FormLabel>
                     <FormControl>
                       <InputOTP
                         {...field}
@@ -124,7 +124,7 @@ export const RegisterForm = () => {
                                     <InputOTPSeparator />
                                   )}
                                 </React.Fragment>
-                              ))}{" "}
+                              ))}
                             </InputOTPGroup>
                           </>
                         )}
@@ -142,7 +142,7 @@ export const RegisterForm = () => {
                   name="firstName"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>First name</FormLabel>
+                      <FormLabel>{t("firstName")}</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
@@ -161,8 +161,10 @@ export const RegisterForm = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>
-                        Last name{" "}
-                        <span className="text-xs text-primary">(optional)</span>
+                        {t("lastName")}
+                        <span className="text-xs text-primary">
+                          ({t("optional")})
+                        </span>
                       </FormLabel>
                       <FormControl>
                         <Input
@@ -182,12 +184,12 @@ export const RegisterForm = () => {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Password</FormLabel>
+                      <FormLabel>{t("password")}</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
                           disabled={isPending}
-                          placeholder="Your very secured password "
+                          placeholder={t("passwordLabel")}
                           type="password"
                         />
                       </FormControl>
@@ -204,13 +206,13 @@ export const RegisterForm = () => {
             <div className="w-full">
               <Button type="button" className="w-full" asChild>
                 <Link href={"/auth/login"} className="">
-                  Login
+                  {t("login")}
                 </Link>
               </Button>
             </div>
           ) : (
             <Button type="submit" className="w-full" loading={isPending}>
-              {validToken ? <>Create an acoount</> : <>Continue</>}
+              {validToken ? <>{t("description")}</> : <>{t("continue")}</>}
             </Button>
           )}
         </form>

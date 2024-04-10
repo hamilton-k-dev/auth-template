@@ -1,0 +1,88 @@
+{
+  "Index": {
+    "title": "Modèle d'authentification Next.js",
+    "description": "Il s'agit d'un modèle Next.js avec des fonctionnalités d'authentification complètes, comprenant la connexion sociale, l'authentification à deux facteurs et les fonctionnalités de réinitialisation de mot de passe. De plus, il offre un support pour les modes clair et sombre, ainsi que des capacités multilingues.",
+    "footer": "pied de page",
+    "login": "Connexion",
+    "logout": "Déconnexion",
+    "settings": "Paramètres",
+    "back": "Retour"
+  },
+    "LoginPage": {
+      "login": "Connexion",
+      "register": "S'inscrire",
+      "description": "Connectez-vous à votre compte",
+      "social": "OU CONTINUER AVEC",
+      "email": "E-mail",
+      "password": "Mot de passe",
+      "passwordLabel": "Votre mot de passe fort",
+      "actionText": "Vous n'avez pas de compte ?",
+      "hearderLabel": "Un email vous a été envoyé avec un jeton de vérification",
+      "continue": "Continuer",
+      "forgotPassword": "Mot de passe oublié ?",
+      "verificationToken": "Jeton de vérification"
+  },
+  "RegistrationPage": {
+      "login": "Connexion",
+      "register": "S'inscrire",
+      "description": "Créer un compte",
+      "social": "OU CONTINUER AVEC",
+      "email": "E-mail",
+      "password": "Mot de passe",
+      "passwordLabel": "Votre mot de passe fort",
+      "actionText": "Vous avez déjà un compte ?",
+      "verificationToken": "Jeton de vérification",
+      "firstName": "Prénom",
+      "lastName": "Nom de famille",
+      "optional": "optionnel",
+      "continue": "Continuer",
+      "finished": "Compte créé"
+  },
+  "ResetPasswordPage": {
+      "title": "Réinitialisez votre mot de passe",
+      "success": "Votre mot de passe a été réinitialisé",
+      "action": "Vous souvenez-vous de votre mot de passe ?",
+      "verificationToken": "Jeton de vérification",
+      "newPassword": "Votre nouveau mot de passe",
+      "newPasswordLabel": "Entrez votre nouveau mot de passe"
+  },
+  "SettingsPage": {
+    "hearder": "Mettez à jour vos informations",
+    "verificationToken": "Jeton de vérification",
+    "firstName": "Prénom",
+    "lastName": "Nom de famille",
+    "oldPassword": "Ancien mot de passe",
+    "passwordLabel": "Votre mot de passe fort",
+    "newPasswordLabel": "Nouveau mot de passe",
+    "tFAuthentication": "Authentification à deux facteurs",
+    "enabledTFA": "Authentification à deux facteurs activée pour votre compte",
+    "save": "Enregistrer",
+    "email": "Email"
+  },
+  "action": {
+      "invalidCode": "Code invalide !",
+      "codeExpired": "Le code a expiré !",
+      "InvalidC": "Informations d'identification invalides !",
+      "sWrong": "Quelque chose s'est mal passé !",
+      "emailAU": "E-mail déjà utilisé !",
+      "tokenSend": "Jeton envoyé, vérifiez votre adresse e-mail !",
+      "validT": "Jeton valide !",
+      "AccountC": "Compte créé !",
+      "rError": "Erreur lors de l'inscription",
+      "InvalidF": "Champs invalides !",
+      "emailNotexist": "Cet e-mail n'existe pas !",
+      "noUser": "Il n'y a pas d'utilisateur avec cette adresse e-mail !",
+      "passwordRTS": "Jeton de réinitialisation de mot de passe envoyé ! Vérifiez votre e-mail",
+      "passwordReset": "Réinitialisation du mot de passe réussie !",
+      "emailSent": "E-mail de vérification envoyé !",
+      "": "Mot de passe incorrect !",
+      "userIU": "Informations d'utilisateur mises à jour !",
+      "unAuthorized": "Non autorisé !"
+  },
+    "Global":{
+      "language":"Langue"
+    },
+    "settings":{
+      "logout":"Se deconnerter"
+    }
+  }
