@@ -76,14 +76,14 @@ export const LoginForm = () => {
           className="space-y-6"
           noValidate
         >
-          <div className="space-y-4">
-            <div className={`${twoFactor && "hidden"}`}>
+          <div className="">
+            <div className={`space-y-4 ${twoFactor && "hidden"}`}>
               <FormField
                 control={form.control}
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>{t("email")}</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
