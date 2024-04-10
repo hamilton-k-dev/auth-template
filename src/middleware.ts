@@ -39,7 +39,7 @@ const authMiddleware = auth((req) => {
   const isLogging = !!req.auth;
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
   const isPublicRoute = nextUrl.pathname == "/" || publicRoutesLocale.includes(nextUrl.pathname);
-  const isAuthRoutes = nextUrl.pathname == "/auth/register" || authRoutesLocale.includes(nextUrl.pathname);
+  const isAuthRoutes = authRoutesLocale.includes(nextUrl.pathname) || authRoutesLocale.includes(nextUrl.pathname);
   if (isApiAuthRoute) {
     return
   }
@@ -66,7 +66,7 @@ export const config = {
 };
 export default function middleware(req: NextRequest) {
   const { nextUrl } = req;
-  const isPublicPage = PublicRoutes.includes(nextUrl.pathname);
+  const isPublicPage = nextUrl.pathname == "/" || publicRoutesLocale.includes(nextUrl.pathname);
   if (isPublicPage) {
     return intlMiddleware(req);
   } else {
