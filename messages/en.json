@@ -3,6 +3,7 @@
       "title": "Next.js auth template",
       "description":"This is a Next.js template with a comprehensive authentication features, including social login, two-factor authentication, and password reset functionalities. Additionally, it provides support for both light and dark modes, as well as multi-language capabilities.",
       "footer":"footer",
+      "register":"Register",
       "login":"Login",
       "logout":"Logout",
       "settings":"Settings",
@@ -80,7 +81,10 @@
       "unAuthorized":"Not authorized !"
     },
     "Global":{
-      "language":"Language"
+      "language":"Language",
+      "logout":"Logout",
+      "register":"Register",
+      "login":"Login"
     },
     "settings":{
       "logout":"Logout"

@@ -1,10 +1,11 @@
 {
   "Index": {
-    "title": "Modèle d'authentification Next.js",
+    "title": "Template d'authentification Next.js",
     "description": "Il s'agit d'un modèle Next.js avec des fonctionnalités d'authentification complètes, comprenant la connexion sociale, l'authentification à deux facteurs et les fonctionnalités de réinitialisation de mot de passe. De plus, il offre un support pour les modes clair et sombre, ainsi que des capacités multilingues.",
     "footer": "pied de page",
     "login": "Connexion",
-    "logout": "Déconnexion",
+    "register": "S'inscrire",
+    "logout": "Se deconnerter",
     "settings": "Paramètres",
     "back": "Retour"
   },
@@ -80,7 +81,10 @@
       "unAuthorized": "Non autorisé !"
   },
     "Global":{
-      "language":"Langue"
+      "language":"Langue",
+      "logout":"Se deconnerter",
+      "register":"S'inscrire",
+      "login":"Connexion"
     },
     "settings":{
       "logout":"Se deconnerter"
