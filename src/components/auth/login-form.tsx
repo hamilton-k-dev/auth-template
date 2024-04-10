@@ -48,18 +48,19 @@ export const LoginForm = () => {
     },
   });
   const t = useTranslations("LoginPage");
-  const headerLabel = twoFactor ? t("hearderLabelEmailSend") : t("description");
+  const headerLabel = twoFactor ? t("hearderLabel") : t("description");
   const buttonLabel = twoFactor ? t("continue") : t("login");
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
     setError("");
     setSuccess("");
     startTransition(() => {
       login(values).then((data) => {
+        console.log(values);
         setError(data.error);
         setTwoFactor(data.twoFactor);
+        values.token = "";
       });
     });
-    console.log(values);
   };
   const Icon = passwordInputType === "password" ? Eye : EyeOff;
   return (
@@ -76,79 +77,78 @@ export const LoginForm = () => {
           noValidate
         >
           <div className="space-y-4">
-            {!twoFactor ? (
-              <>
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Email</FormLabel>
-                      <FormControl>
+            <div className={`${twoFactor && "hidden"}`}>
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                        placeholder="hamilton_k@example.com"
+                        type="email"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem className="relative">
+                    <FormLabel>
+                      <div className="flex justify-between items-center">
+                        <div>{t("password")}</div>
+                        <Link
+                          href={"/auth/reset-password"}
+                          className=" text-primary text-sm"
+                        >
+                          {t("forgotPassword")}
+                        </Link>
+                      </div>
+                    </FormLabel>
+                    <FormControl>
+                      <div className="relative">
                         <Input
                           {...field}
                           disabled={isPending}
-                          placeholder="hamilton_k@example.com"
-                          type="email"
+                          placeholder={t("passwordLabel")}
+                          type={passwordInputType}
                         />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="password"
-                  render={({ field }) => (
-                    <FormItem className="relative">
-                      <FormLabel>
-                        <div className="flex justify-between items-center">
-                          <div>{t("password")}</div>
-                          <Link
-                            href={"/auth/reset-password"}
-                            className=" text-primary text-sm"
-                          >
-                            {t("forgotPassword")}
-                          </Link>
-                        </div>
-                      </FormLabel>
-                      <FormControl>
-                        <div className="relative">
-                          <Input
-                            {...field}
-                            disabled={isPending}
-                            placeholder={t("passwordLabel")}
-                            type={passwordInputType}
+
+                        <div
+                          className="absolute right-2 top-1/2 -translate-y-1/2"
+                          onClick={() => {
+                            passwordInputType === "password"
+                              ? setPasswordInputType("text")
+                              : setPasswordInputType("password");
+                          }}
+                        >
+                          <Icon
+                            className="text-muted-foreground cursor-pointer text-xs"
+                            size={18}
                           />
-
-                          <div
-                            className="absolute right-2 top-1/2 -translate-y-1/2"
-                            onClick={() => {
-                              passwordInputType === "password"
-                                ? setPasswordInputType("text")
-                                : setPasswordInputType("password");
-                            }}
-                          >
-                            <Icon
-                              className="text-muted-foreground cursor-pointer text-xs"
-                              size={18}
-                            />
-                          </div>
                         </div>
-                      </FormControl>
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
 
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </>
-            ) : (
+            <div className={`${!twoFactor && "hidden"}`}>
               <FormField
                 control={form.control}
                 name="token"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="">{"verificationToken"}</FormLabel>
+                    <FormLabel className="">{t("verificationToken")}</FormLabel>
                     <FormControl>
                       <InputOTP
                         {...field}
@@ -166,7 +166,7 @@ export const LoginForm = () => {
                                     <InputOTPSeparator />
                                   )}
                                 </React.Fragment>
-                              ))}{" "}
+                              ))}
                             </InputOTPGroup>
                           </>
                         )}
@@ -176,7 +176,7 @@ export const LoginForm = () => {
                   </FormItem>
                 )}
               />
-            )}
+            </div>
           </div>
           <FormError message={error} />
           <FormSuccess message={success} />
