@@ -9,7 +9,7 @@
 # testing
 /coverage
 /src/middleware
-
+/src/app/locale/user/users
 # next.js
 /.next/
 /out/
