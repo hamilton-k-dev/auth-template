@@ -55,7 +55,6 @@ export const LoginForm = () => {
     setSuccess("");
     startTransition(() => {
       login(values).then((data) => {
-        console.log(values);
         setError(data.error);
         setTwoFactor(data.twoFactor);
         values.token = "";

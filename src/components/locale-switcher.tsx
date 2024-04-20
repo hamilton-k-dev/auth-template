@@ -7,17 +7,25 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useLocale, useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useTransition } from "react";
-import { supportedLanguage } from "@/locale";
+import locales, { supportedLanguage } from "@/locale";
 
 export default function LocaleSwitcher() {
   const router = useRouter();
+  const pathname = usePathname();
   const [isPending, startTransition] = useTransition();
   const localeActive = useLocale();
   const onSelectChange = (selectedValue: any) => {
     startTransition(() => {
-      router.replace(`/${selectedValue}`);
+      const [noVal, currentLanguage, ...restPath] = pathname.split("/");
+      if (locales.includes(selectedValue)) {
+        const newPathname = `/${selectedValue}${
+          restPath.length > 0 ? "/" : ""
+        }${restPath.join("/")}`;
+        router.replace(newPathname);
+      }
+      // router.replace(`/${selectedValue}`);
     });
   };
   return (

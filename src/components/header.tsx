@@ -8,7 +8,7 @@ import { LoginButton } from "./auth/login-button";
 function Header() {
   const t = useTranslations("Global");
   return (
-    <div className="fixed top-0 w-full border-b flex flex-row justify-between py-3 px-4 lg:px-32 items-center">
+    <div className="fixed top-0 w-full border-b flex flex-row justify-between py-3 px-4 lg:px-32 items-center bg-primary-foreground z-50">
       <div className="hidden lg:flex gap-4 items-center">
         <Button variant={"default"} asChild>
           <Link href={"/auth/register"}>{t("register")}</Link>

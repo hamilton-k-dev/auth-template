@@ -64,7 +64,6 @@ export const RegisterForm = () => {
         }
       });
     });
-    console.log(values);
   };
   return (
     <CardWrapper
