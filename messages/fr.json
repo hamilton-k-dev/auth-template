@@ -58,7 +58,8 @@
     "tFAuthentication": "Authentification à deux facteurs",
     "enabledTFA": "Authentification à deux facteurs activée pour votre compte",
     "save": "Enregistrer",
-    "email": "Email"
+    "email": "Email",
+    "back":"Retour"
   },
   "action": {
       "invalidCode": "Code invalide !",

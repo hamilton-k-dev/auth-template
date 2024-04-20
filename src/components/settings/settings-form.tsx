@@ -33,8 +33,10 @@ import Header from "../auth/header";
 import useCurrentUser from "@/hooks/use-current-user";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 
 export const SettingsForm = () => {
+  const router = useRouter();
   const t = useTranslations("SettingsPage");
   const { data: session, status, update } = useSession();
   const user = useCurrentUser();
@@ -243,6 +245,14 @@ export const SettingsForm = () => {
               <FormSuccess message={success} />
               <Button type="submit" className="w-full" loading={isPending}>
                 {t("save")}
+              </Button>
+              <Button
+                type="button"
+                variant={"secondary"}
+                className="w-full"
+                onClick={() => router.back()}
+              >
+                {t("back")}
               </Button>
             </form>
           </Form>

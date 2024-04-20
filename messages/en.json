@@ -58,7 +58,8 @@
       "tFAuthentication":"Two factor authentication",
       "enabledTFA":"Enabled two factor authentication for your account",
       "save":"Save",
-      "email":"Email"
+      "email":"Email",
+      "back":"Back"
     },
     "action":{
       "invalidCode":"invalid code !",
