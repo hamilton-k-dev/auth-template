@@ -38,7 +38,6 @@ export const SettingsForm = () => {
   const t = useTranslations("SettingsPage");
   const { data: session, status, update } = useSession();
   const user = useCurrentUser();
-  console.log(user);
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>();
   const [success, setSuccess] = useState<string | undefined>();
@@ -67,7 +66,6 @@ export const SettingsForm = () => {
         update();
       });
     });
-    console.log(values);
   };
   return (
     <Card className="w-full h-screen flex flex-col items-center justify-center shadow-md">
